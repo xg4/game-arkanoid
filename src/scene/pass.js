@@ -8,11 +8,18 @@ class ScenePass extends Scene {
         this.transition()
     }
 
+    init() {
+        this.game.c.ontouchstart = null
+        this.game.c.ontouchmove = null
+        this.game.c.ontouchend = null
+    }
+
     transition() {
         setTimeout(() => {
             this.game.replaceScene(new SceneMain(this.game))
         }, 2000)
     }
+
     draw() {
         this.game.ctx.save()
         this.game.ctx.font = '15px sans-serif'

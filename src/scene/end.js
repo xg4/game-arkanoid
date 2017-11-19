@@ -12,6 +12,12 @@ class SceneEnd extends Scene {
         this.game.registerAction('R', () => {
             this.game.replaceScene(new SceneStart(this.game))
         })
+
+        // 触屏重玩
+        this.game.c.ontouchstart = () => {    
+            this.game.replaceScene(new SceneStart(this.game))
+        }
+        
     }
     draw() {
         this.game.ctx.save()
@@ -20,6 +26,8 @@ class SceneEnd extends Scene {
         this.game.ctx.textAlign = "center"
         this.game.ctx.textBaseline = "middle"
         this.game.ctx.fillText('游戏结束！按 r 重新开始游戏！', this.game.w / 2, this.game.h / 2);
+        this.game.ctx.fillText('手机用户点击屏幕', this.game.w / 2, this.game.h / 2 + 30)
+        this.game.ctx.fillText('重新开始游戏', this.game.w / 2, this.game.h / 2 + 45)
         this.game.ctx.restore()
     }
 }

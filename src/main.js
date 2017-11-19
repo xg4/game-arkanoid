@@ -19,9 +19,21 @@ const images = {
 
 Promise.all(loadImg(images)).then(function () {
 
-    const game = new Game('#xgame', 30, images)
+
+
+    let w
+    console.log(window.navigator.platform)
+    if (window.navigator.platform.indexOf('Win32') != -1) {
+        w = 500
+    } else {
+        w = document.body.offsetWidth
+    }
+
+
+    const game = new Game('#xgame', 60, images, w)
 
     const sceneStart = new SceneStart(game)
     game.run(sceneStart)
+
 
 })

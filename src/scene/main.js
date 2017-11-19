@@ -45,6 +45,20 @@ class SceneMain extends Scene {
             this.ball.fire()
         })
 
+        // 触屏滑块移动
+        this.game.c.ontouchstart = (ev) => {
+            let x = ev.touches[0].clientX
+            let c = this.paddle.x
+            this.game.c.ontouchmove = (ev) => {               
+                this.paddle.x = c + ev.touches[0].clientX - x
+            }
+            this.game.c.ontouchend = function () {                
+                this.ontouchmove = null
+                this.ontouchend = null
+            }
+        }
+
+
         if (this.game.debug) {
             let game = this.game
             window.addEventListener('keydown', (ev) => {
@@ -60,7 +74,7 @@ class SceneMain extends Scene {
             document.querySelector('#changeFps')
                 .addEventListener('input', function () {
                     let fps = this.value
-                    fps = Math.min(fps, 60)
+                    fps = Math.min(fps, 100)
                     fps = Math.max(fps, 1)
                     game.fps = fps
                 })
@@ -78,12 +92,15 @@ class SceneMain extends Scene {
         }
         if (this.ball.y > this.paddle.y + 50) {
             this.game.lives -= 1
-            this.game.replaceScene(new ScenePass(this.game))
             if (this.game.lives < 1) {
+                // 游戏结束
                 this.game.lives = 3
                 this.game.level = 1
                 this.game.score = 0
                 this.game.replaceScene(new SceneEnd(this.game))
+            } else {
+                // 死亡动画
+                this.game.replaceScene(new ScenePass(this.game))
             }
         }
         if (this.game.pause) {

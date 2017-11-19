@@ -11,7 +11,7 @@ class Ball {
         this.w = this.img.width
         this.h = this.img.height
 
-        this.fired = false
+        this.fired = true
     }
 
     fire() {

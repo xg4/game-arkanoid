@@ -1,9 +1,12 @@
 import { setInterval } from "timers";
 
 class Game {
-    constructor(id, fps, images) {
+    constructor(id, fps, images, width, height) {
         this.c = document.querySelector(id)
         this.ctx = this.c.getContext('2d')
+
+        this.c.width = width - this.c.clientLeft * 2
+        this.c.height = 500
         this.w = this.c.width
         this.h = this.c.height
 
@@ -13,6 +16,8 @@ class Game {
         this.lives = 3
         this.level = 1
         this.score = 0
+
+        this.start = false
 
         this.fps = fps
         this.realFps = 0
@@ -28,11 +33,11 @@ class Game {
     init() {
         window.addEventListener('keydown', e => {
             this.keydowns[e.key] = true
-        });
+        })
 
         window.addEventListener('keyup', e => {
             this.keydowns[e.key] = false
-        });
+        })
 
         setInterval(() => {
             this.showFps = this.realFps
@@ -47,7 +52,7 @@ class Game {
             console.log('run');
             for (let key in this.actions) {
                 if (this.keydowns[key]) {
-                    this.actions[key]();
+                    this.actions[key]()
                 }
             }
             this.realFps++
@@ -77,7 +82,7 @@ class Game {
     }
 
     registerAction(key, callback) {
-        this.actions[key] = callback;
+        this.actions[key] = callback
     }
 
     changeFps(fps) {

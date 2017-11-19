@@ -1,5 +1,6 @@
 import Scene from './scene'
 import SceneMain from './main'
+import ScenePass from './pass'
 
 class SceneStart extends Scene {
     constructor(game) {
@@ -8,11 +9,17 @@ class SceneStart extends Scene {
     init() {
         this.game.actions = {}
         this.game.registerAction('k', () => {
-            this.game.replaceScene(new SceneMain(this.game))
+            this.game.replaceScene(new ScenePass(this.game))
         })
         this.game.registerAction('K', () => {
-            this.game.replaceScene(new SceneMain(this.game))
+            this.game.replaceScene(new ScenePass(this.game))
         })
+
+        // 触屏开始游戏
+        this.game.c.ontouchstart = () => {           
+            this.game.replaceScene(new ScenePass(this.game))
+        }
+
     }
     draw() {
         this.game.ctx.save()
@@ -24,6 +31,8 @@ class SceneStart extends Scene {
         this.game.ctx.fillText('特别鸣谢： ZXC LWJ  ', this.game.w / 2, this.game.h / 2 - 45)
 
         this.game.ctx.fillText('按 k 开始游戏！', this.game.w / 2, this.game.h / 2)
+        this.game.ctx.fillText('手机用户点击屏幕', this.game.w / 2, this.game.h / 2 + 30)
+        this.game.ctx.fillText('开始游戏', this.game.w / 2, this.game.h / 2 + 45)
         this.game.ctx.restore()
     }
 }
