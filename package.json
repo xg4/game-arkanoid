@@ -1,14 +1,17 @@
 {
-  "name": "xgame",
+  "name": "game",
   "version": "1.0.0",
   "description": "javascript canvas game",
-  "main": "index.js",
+  "author": "xg4 <xingor4@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --open --hot",
-    "build": "webpack -p"
+    "build": "webpack -p --progress"
   },
-  "author": "x",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xg4/game.git"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
